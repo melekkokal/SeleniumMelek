@@ -35,4 +35,32 @@ public class MovingSlider {
         }
 
     }
+
+
+
+
+    @Test
+    public void practice() throws InterruptedException {
+        WebDriverManager.chromedriver().setup();
+        ChromeOptions options=new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        WebDriver driver=new ChromeDriver(options);
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        driver.get("https://www.globalsqa.com/demoSite/practice/slider/range.html");
+
+        WebElement slider= driver.findElement(By.xpath("//span[@class='ui-slider-handle ui-corner-all ui-state-default']"));
+        WebElement range=driver.findElement(By.xpath("//span[@style='left: 15%;']"));
+
+        String expectedRange="left: 30%;";
+        while(!BrowserUtils.getText(range).contains(expectedRange)){
+            slider.sendKeys(Keys.ARROW_RIGHT);
+            break;
+        }
+
+
+
+
+    }
+
 }
